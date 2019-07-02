@@ -1,0 +1,131 @@
+/* Title slide */
+.title-slide {
+  background-image: url(./figures/Eurocontrol_logo_2010.svg);
+  background-size: 75px;
+  background-position: 5% 97%;
+  background-color: #fff;
+  padding-left: 100px;  /* delete this for 4:3 aspect ratio */
+
+  text-shadow: none;
+}
+
+
+.title-slide:before {
+    content: ' ';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0.4;
+    background-image: url(./figures/IMG_20170217_135548.jpg);
+    background-repeat: no-repeat;
+    background-position: 0% 0;
+    -ms-background-size: cover;
+    -o-background-size: cover;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
+}
+
+
+/* H1 fonts */
+.title-slide h1 {
+  padding-top: 0px;
+  font-weight: normal;
+  color: #000000;
+  opacity: 1;
+  font-size: 55px;
+/*  line-height: 0.05;
+  text-align: left;*/
+  text-shadow: none;
+  padding-bottom: 9px;
+  margin-bottom: 28px;
+  margin-top: 0px;
+}
+
+/* H2 fonts */
+.title-slide h2 {
+  color: rgba(0, 0, 0, 1);
+  font-size: 40px;
+  text-align: left;
+  text-shadow: none;
+  padding-top: 0px;
+  margin-top: 0px;
+}
+
+/* H3 fonts */
+.title-slide h3 {
+  font-size: 32px;
+  font-weight: normal;
+  color: #000000;
+  text-align: left;
+  text-shadow: none;
+  padding-left: 1em;
+  line-height: 1;
+}
+
+
+.title-slide #update-date {
+  font-size: 18px;
+}
+
+.title-slide h3 img {
+  color: #666666;
+}
+
+/* Remove slide count */
+.title-slide .remark-slide-number {
+  display: none;
+}
+
+
+/* Slides et al.*/
+
+
+
+/* from https://github.com/jvcasillas/ru_xaringan */
+.remark-slide-content {
+  font-size: 30px;
+  padding-left: 2em;
+  padding-right: 2em;
+}
+
+.MathJax {
+  font-size: 7em;
+}
+
+.watermark {
+  opacity: 0.2;
+  position: fixed;
+  z-index: 99;
+  top: 40%;
+  left: 32%;
+  font-size: 700%;
+  color: black;
+}
+
+.pull-left {
+  float: left;
+  width: 45%;
+}
+
+.pull-right {
+  float: right;
+  width: 45%;
+}
+
+.pull-right ~ * {
+  clear: both;
+}
+
+/* slightly lower and bigger than default */
+.footnote {
+  position: absolute;
+  bottom: 1em;
+  padding-right: 4em;
+  font-size: 75%;
+}
+
