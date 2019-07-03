@@ -129,3 +129,26 @@
   font-size: 75%;
 }
 
+/* Footer: from https://github.com/yihui/xaringan/wiki/Footer-and-header-lines */
+div.github-packages {
+/*    background-color: #272822; */
+    position: absolute;
+    bottom: 40px;
+    left: 0px;
+    height: 30px;
+    width: 100%;
+}
+div.github-packages span {
+    font-size: 12pt;
+    color: #F7F8FA;
+    position: absolute;
+    left: 15px;
+    bottom: 2px;
+}
+
+
+div.huge {
+/*    background-color: #272822; */
+    font-size: 120pt;
+    width: 100%;
+}

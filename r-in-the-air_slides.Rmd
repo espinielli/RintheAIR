@@ -3,7 +3,7 @@ title: "R in the Air"
 subtitle: "Performance Review for (European) Aviation"
 author: Enrico Spinielli
 institute: "EUROCONTROL</br><small>The European Organisation for the Safety of Air Navigation<small>"
-date: "$\\mathrm{11^{th}}$ Jul 2019<span id='update-date'>(updated: `r format(Sys.time(), '%a %b %d %Y @  %X')`)</span>"
+date: "$\\mathrm{11^{th}}$ Jul 2019"
 output:
   xaringan::moon_reader:
     css: ["default", "r-in-the-air_slides.css"]
@@ -50,6 +50,10 @@ subchunkify <- function(g, fig_height=7, fig_width=5) {
 
 
 ---
+background-image: url(figures/g2g-trj.png)
+background-size: 45%
+background-position: 105% 15%
+
 # Trajectories
 
 * 43 States
@@ -59,12 +63,15 @@ subchunkify <- function(g, fig_height=7, fig_width=5) {
 * 4,27 Million flights in the last 12 months
 * 20 years of civil flights in Europe
 
-* statistical analysis via performance indicators in order to highlight best practices
+* statistical analysis via performance indicators in order to highlight best practices (fuel burnt,
+  $CO_2$ and noise reduction, no ATCO overload):
+  - time/distance in the Terminal Area airspace/apron
+  - continuous descent operations
 
 ---
-background-image: url(figures/reproducible-research-spectrum.png)
-background-size: 85%
-background-position: 65% 90%
+background-image: url(figures/reproducible-research-spectrum.png), url(figures/pru-data-portal-home-page.png)
+background-size: 70%, 32%
+background-position: 75% 80%, 97% 2%
 
 # PRU Portal
 
@@ -72,14 +79,103 @@ background-position: 65% 90%
 * methodology
 * attempt to move towards reproducibility
 * built with `blogdown`, served by [Netlify](https://ansperformance.eu),
-  hosted on [GitHub](https://github.com/euctrl-pru/portal)
+  hosted on [GitHub](https://github.com/euctrl-pru/portal)</br>
+  <small>(but we use also Google Charts/Studio/Spreadsheets, D3, MS Excel)</small>
 
+
+<div class="github-packages center">
+Portal @ <a href="https://ansperformance.eu">https://ansperformance.eu</a>
+</br>
+Source @ <a href="https://github.com/euctrl-pru">https://github.com/euctrl-pru</a>
+</div>
+
+
+---
+background-image: url(figures/nvctr-logo.svg), url(figures/ectrlplot-logo.svg), url(figures/trrrj-logo.png)
+background-size: 128px, 128px, 128px
+background-position: 15% 75%, 45% 75%, 75% 75%
+
+# Packaging and sharing
+
+* `nvctr`: <small>n-vector approach to geographical position calculations using an ellipsoidal model of Earth</small>
+* `ectrlplot`: <small>`ggplot2` style (inspired by BBC's `bbplot` `r emo::ji("package")`)</small>
+* `trrrj`: <small>analysis facilities for flight trajectories</small>
+
+<div class="github-packages center">Everything @ <a href="https://github.com/euctrl-pru">https://github.com/euctrl-pru</a></div>
+---
+
+# `trrrj` - <small>read</small>
+
+Supported file formats:
+* `SO6`: segment based description
+* `CPR`: radar position reports
+* `ALL_FT+`: mix of radar and flight plan
+
+---
+background-image: url(figures/many-flights.png), url(figures/one-flight-vertical.png) 
+background-size: 50%, 42%
+background-position: 1% 75%, 95% 75%
+
+# `trrrj` - <small>plot</small>
 
 
 ---
 
-# Packaging
-* nvctr
+# `trrrj` - <small>export from DB</small>
+
+export from EUROCONTROL DB (internal feature):
+* trajectories: dataframe of
+    - flight ID
+    - timestamp
+    - longitude, latitude, altitude
+    - ... (aircraft type, ADEP, ADES, ...)
+* airspaces: polygon and min/MAX flight level
+
+---
+
+# `trrrj` - <small>trj/airspace intersections</small>
+
+No much help `r emo::ji("sob")` from `sf` or other spatial `r emo::ji("package")`s
+
+<center><Big>`r emo::ji("construction")`</Big></center></br>
+<center>if you know/can help us, please reach out</center>
+
+
+---
+background-image: url(figures/holding_85.png)
+background-size: 65%
+background-position: 93% 75%
+
+# Examples
+
+---
+background-image: url(figures/Avg_time_lvl_apts_2015_2016_15.jpeg)
+background-size: 85%
+background-position: 93% 75%
+
+---
+background-image: url(figures/average-delay-grouped-1.png)
+background-size: 85%
+background-position: 23% 75%
+
+
+---
+background-image: url(figures/fr24_density.png)
+background-size: 60%
+background-position: 70% 60%
+
+# Density
+
+
+<div class="github-packages">FR24 Flights on 2017-08-97 @ 11:00 - 12:00</div>
+
+---
+
+# R can fly!
+
+<div class="huge center">Questions?</div>
+
+Or drop me an email: [enrico.spinielli@eurocontrol.int](mailto:enrico.spinielli@eurocontrol.int)
 
 ---
 class: center, middle
@@ -87,7 +183,8 @@ class: center, middle
 ```{r, eval=TRUE,echo=FALSE,warning=FALSE,error=FALSE}
 g <- thankyou_words_small %>% 
   mutate(speakers = ifelse(iso_639_3 == "eng", 1500, speakers)) %>% 
-  ggplot(aes(label = word, size = speakers)) +
+  mutate(angle = 45 * sample(-2:2, n(), replace = TRUE, prob = c(1, 1, 4, 1, 1))) %>% 
+  ggplot(aes(label = word, size = speakers, color = speakers, angle = angle)) +
   geom_text_wordcloud() +
   scale_size_area(max_size = 30) +
   theme_minimal()
